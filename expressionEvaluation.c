@@ -99,7 +99,7 @@ int infixToPostfix(char* infixExpression, char postfixExpression[])
 	postfixExpression[numIndex++] = ' ';   //在后缀表达式的最后加一个空格
 	double numberArray[100] = {0.0};    
     int number = getNumOfExpression(postfixExpression, numberArray);
-	proper = Isproper(postfixExpression, numberArray); 
+	proper = Isproper(infixExpression, numberArray); 
 	if(!proper)  
 	{
 		for(int i = 0; i < 100; i++)
@@ -217,7 +217,7 @@ int Isproper(char *postfixExpression, double numberArray[])
         	charPush(brace, postfixExpression[index]);
         else if(postfixExpression[index] == ')')
         {
-        	if(!charIsEmpty)
+        	if(!charIsEmpty(brace))
             	charPop(brace);
             //遇到右括号,若此时栈为空,则说明之前没有左括号
             else{
@@ -259,6 +259,7 @@ int Isproper(char *postfixExpression, double numberArray[])
         {
         	Digit++;
         }
+
         i++;
 	}
 	//对运算符和运算数个数进行判断,正确的表达式操作数总比操作符多一个
