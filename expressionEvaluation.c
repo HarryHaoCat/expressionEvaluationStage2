@@ -29,6 +29,9 @@ int Priority(char c)
 //中缀转后缀
 int infixToPostfix(char* infixExpression, char postfixExpression[])
 {
+	//初始化后缀表达式数组
+	for(int i = 0; i < 100; i++)
+        postfixExpression[i] = '\0';
 	charStack* s = charCreateStack();
 	int index = 0;
 	int numIndex = 0;
@@ -100,11 +103,7 @@ int infixToPostfix(char* infixExpression, char postfixExpression[])
 	double numberArray[100] = {0.0};    
     int number = getNumOfExpression(postfixExpression, numberArray);
 	proper = Isproper(infixExpression, numberArray); 
-	if(!proper)  
-	{
-		for(int i = 0; i < 100; i++)
-        postfixExpression[i] = '\0';
-	}
+
     return proper;
 
 }

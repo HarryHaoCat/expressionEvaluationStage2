@@ -1,8 +1,9 @@
-#ifndef _STACK_H_
-#define _STACK_H_
+#ifndef _SEQUENTIALSTACK_H_
+#define _SEQUENTIALSTACK_H_
+
 #define MAXSIZE 1000      //定义最大线性栈的存储空间
 
-typedef struct {
+typedef struct IS{
 	int* array;
 	int Top;
 	int len;
@@ -17,7 +18,7 @@ void intClearStack(intStack* PtrS);
 int intGetTop(intStack* s);		
 
 //char型栈
-typedef struct {
+typedef struct CS{
 	char* array;
 	int Top;
 	int len;
@@ -31,7 +32,7 @@ void charClearStack(charStack* PtrS);
 char charGetTop(charStack* s);		
 
 //double型栈
-typedef struct {
+typedef struct DS{
 	double* array;
 	int Top;
 	int len;

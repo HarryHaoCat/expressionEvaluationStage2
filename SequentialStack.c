@@ -71,6 +71,7 @@ int intGetTop(intStack* s)       //得到栈顶元素
 		return 0;
 	}
 	int data =  s->array[s->Top - 1];
+	return data;
 }
 
 //char型栈的实现
@@ -141,6 +142,7 @@ char charGetTop(charStack* s)             //得到栈顶元素
 		return 0;
 	}
 	char data =  s->array[s->Top - 1];
+	return data;
 }
 
 //double型栈的实现
@@ -215,4 +217,5 @@ double doubleGetTop(doubleStack* s)        //得到栈顶元素
 		return 0;
 	}
 	double data =  s->array[s->Top - 1];
+	return data;
 }
