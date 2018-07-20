@@ -100,6 +100,11 @@ int infixToPostfix(char* infixExpression, char postfixExpression[])
 	double numberArray[100] = {0.0};    
     int number = getNumOfExpression(postfixExpression, numberArray);
 	proper = Isproper(postfixExpression, numberArray); 
+	if(!proper)  
+	{
+		for(int i = 0; i < 100; i++)
+        postfixExpression[i] = '\0';
+	}
     return proper;
 
 }
@@ -198,12 +203,7 @@ int Isproper(char *postfixExpression, double numberArray[])
 	int operator = 0;
 	int Digit = 0;
 	int blank = 0;
-    //开头是右括号直接返回0
-	if(postfixExpression[1] == ')')
-	{
-		printf("There are improper braces in your expression!\n");
-		return 0;
-	}
+ 
 	//进行一次遍历
 	while(postfixExpression[index] != '\0')
 	{
