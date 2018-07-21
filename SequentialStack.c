@@ -1,78 +1,15 @@
+/*************************************************************************
+> File Name: expressionEvaluation.c
+> Author: HaoJie
+> Mail: 954487858@qq.com
+> Created Time: 2018年07月16日  星期一 16h22m3s
+************************************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
 #include<string.h>
 #include "SequentialStack.h"
 
-//int型栈的实现
-intStack* intCreateStack() //建栈,第一个位置从0开始；
-{
-	intStack* p = (intStack*)malloc(sizeof(intStack));
-	p->array = (int*)malloc(MAXSIZE*sizeof(int));
-	p->Top = 0; 
-	p->len = MAXSIZE;  
-	return p;
-}
-void intPush(intStack* PtrS, int item) 
-{
-	if(PtrS->Top >= PtrS->len)
-	{
-		int *array =  (int*)malloc((PtrS->Top  + MAXSIZE)*sizeof(int));
-		int L = PtrS->len;
-		memcpy(array, PtrS->array, L * sizeof(int));
-		free(PtrS->array);
-		PtrS->array = array;
-		PtrS->len = L + MAXSIZE;
-		
-	}
-	PtrS->array[PtrS->Top++] = item;
-	//printf("%d Push success!\n", PtrS->array[PtrS->Top - 1]);
-	
-}
-
-int intPop(intStack * PtrS)  //出栈；
-{
-	if(PtrS->Top == 0)
-	{
-		printf("This is an empty stack!\n");
-		return 0;
-	}
-	int data =  PtrS->array[PtrS->Top - 1];
-	PtrS->Top = PtrS->Top - 1;
-	return data;
-}
-
-int intIsEmpty(intStack* S)   //判断栈是否为空；
-{
-	if (S->Top == 0)
-	{
-		
-		//printf("This is an empty stack!\n");
-		return 1;
-	}
-	else
-	{
-		//printf("This is not an empty stack!\n");
-		return 0;
-	}
-}
-
-void intClearStack(intStack* PtrS) //清除栈
-{
-	free(PtrS);
-	//printf("ClearStack success!\n");
-}
-
-int intGetTop(intStack* s)       //得到栈顶元素
-{
-	if(s->Top == 0)
-	{
-		//printf("This is an empty stack!");
-		return 0;
-	}
-	int data =  s->array[s->Top - 1];
-	return data;
-}
 
 //char型栈的实现
 charStack* charCreateStack() //建栈,第一个位置从0开始；

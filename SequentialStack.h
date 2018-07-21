@@ -1,21 +1,13 @@
+/*************************************************************************
+> File Name: expressionEvaluation.c
+> Author: HaoJie
+> Mail: 954487858@qq.com
+> Created Time: 2018年07月16日  星期一 16h22m3s
+************************************************************************/
 #ifndef _SEQUENTIALSTACK_H_
 #define _SEQUENTIALSTACK_H_
 
 #define MAXSIZE 1000      //定义最大线性栈的存储空间
-
-typedef struct IS{
-	int* array;
-	int Top;
-	int len;
-}intStack;
-
-//int型的栈
-intStack* intCreateStack();					
-void intPush(intStack* PtrS, int item);	
-int intPop(intStack* PtrS);				
-int intIsEmpty(intStack* S);						
-void intClearStack(intStack* PtrS);		
-int intGetTop(intStack* s);		
 
 //char型栈
 typedef struct CS{
