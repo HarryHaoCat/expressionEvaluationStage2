@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include "SequentialStack.h"
-#include <math.h>
 #include <ctype.h>
 
 //操作符优先级计算函数
@@ -26,11 +25,28 @@ int Priority(char c)
 	}
 }
 
+//Pow幂函数
+double Pow(double i, int j)
+{
+	int k = 0;
+	double result = i;
+	if(j > 1)
+	{
+		for(k = 0; k < j - 1; k++)
+		{
+			result = result * i;
+		}
+	}
+	else if(j == 1) result = i;
+	else if(j == 0) result = 1;
+
+	return result;
+}
 //得到第一个操作符若为'+'或者'-',并且后面跟数,则返回值1
 int getFirstOperator(char* infixExpression)
 {
 	int index = 0;
-while (infixExpression[index] != '\0')
+	while (infixExpression[index] != '\0')
 	{
 		if (isdigit(infixExpression[index]))
 			return 0;
@@ -56,8 +72,9 @@ while (infixExpression[index] != '\0')
 		}
 		else
 			return 0;
-		//index++;
 	}
+	//否则返回0
+	return 0;
 }
 
 //中缀转后缀
@@ -73,7 +90,8 @@ int infixToPostfix(char* infixExpression, char postfixExpression[])
 	while (infixExpression[index] != '\0')
 	{
 		//如果是操作数
-		if (infixExpression[index] != '+' && infixExpression[index] != '-' && infixExpression[index] != '*' && infixExpression[index] != '/' && infixExpression[index] != '(' && infixExpression[index] != ')')
+		if (infixExpression[index] != '+' && infixExpression[index] != '-' && infixExpression[index] != '*' 
+			&& infixExpression[index] != '/' && infixExpression[index] != '(' && infixExpression[index] != ')')
 		{
 			postfixExpression[numIndex++] = infixExpression[index];
 		}
@@ -83,7 +101,8 @@ int infixToPostfix(char* infixExpression, char postfixExpression[])
 			charPush(s, infixExpression[index]);
 		}
 		//如果是运算符
-		else if (infixExpression[index] == '+' || infixExpression[index] == '-' || infixExpression[index] == '*' || infixExpression[index] == '/' || infixExpression[index] == ')')
+		else if (infixExpression[index] == '+' || infixExpression[index] == '-' || infixExpression[index] == '*' 
+			|| infixExpression[index] == '/' || infixExpression[index] == ')')
 		{
 
 			//若栈为空,直接将运算符进栈
@@ -143,7 +162,7 @@ int infixToPostfix(char* infixExpression, char postfixExpression[])
 	}
 	postfixExpression[numIndex++] = ' ';   //在后缀表达式最后加一个空格
 	double numberArray[100] = { 0.0 };
-	int number = getNumOfExpression(postfixExpression, numberArray);
+	getNumOfExpression(postfixExpression, numberArray);
 	proper = Isproper(infixExpression, numberArray);
 	return proper;
 
@@ -156,12 +175,12 @@ int computeValueFromPostfix(char* postfixExpression, double *value)
 	int numIndex = 0;
 	int number = getNumOfExpression(postfixExpression, numberArray);
 	doubleStack* ds = doubleCreateStack();
-	int i = 0;
 	while (numIndex <= number)
 	{
 		double num1, num2 = 0.0;
 
-		if (numberArray[numIndex] == -1.0 || numberArray[numIndex] == -2.0 || numberArray[numIndex] == -3.0 || numberArray[numIndex] == -4.0)
+		if (numberArray[numIndex] == -1.0 || numberArray[numIndex] == -2.0 || numberArray[numIndex] == -3.0 
+			|| numberArray[numIndex] == -4.0)
 		{
 			num1 = doublePop(ds);
 			num2 = doublePop(ds);
@@ -206,13 +225,14 @@ int getNumOfExpression(char* postfixExpression, double numberArray[])
 	int numArrayIndex = 0;
 	while (postfixExpression[postIndex] != '\0')
 	{
-		if (postfixExpression[postIndex] == '+' || postfixExpression[postIndex] == '-' || postfixExpression[postIndex] == '*' || postfixExpression[postIndex] == '/' || postfixExpression[postIndex] == ' ')
+		if (postfixExpression[postIndex] == '+' || postfixExpression[postIndex] == '-' || postfixExpression[postIndex] == '*' 
+			|| postfixExpression[postIndex] == '/' || postfixExpression[postIndex] == ' ')
 		{
 			if (!doubleIsEmpty(ds))
 			{
 				int len = ds->Top;
 				for (int j = 0; j < len; j++)
-					numberArray[numArrayIndex] += pow(10.0, j) * doublePop(ds);
+					numberArray[numArrayIndex] += Pow(10.0, j) * doublePop(ds);
 				numArrayIndex++;
 			}
 			switch (postfixExpression[postIndex])
@@ -248,7 +268,8 @@ int Isproper(char *infixExpression, double numberArray[])
 	//进行一次遍历
 	while (infixExpression[index] != '\0')
 	{
-		if ('a' <= infixExpression[index] && infixExpression[index] <= 'z' || 'A' <= infixExpression[index] && infixExpression[index] <= 'Z')
+		if (('a' <= infixExpression[index] && infixExpression[index] <= 'z' )|| ('A' <= infixExpression[index] 
+			&& infixExpression[index] <= 'Z'))
 		{
 			printf("There are illegal characters in your expression!\n");
 			return 0;

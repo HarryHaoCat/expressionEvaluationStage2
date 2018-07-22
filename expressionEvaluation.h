@@ -13,5 +13,6 @@ int Priority(char c);                                                     //运�
 int getNumOfExpression(char* postfixExpression, double numberArray[]);    //得到double型的运算数
 int Isproper(char *postfixExpression, double numberArray[]);              //表达式的合法性判断
 int getFirstOperator(char* infixExpression);                              //得到第一个操作符
+double Pow(double i, int j);                                              //求幂函数           
 #endif
 
